@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Профиль - Wireframe Макет</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* Wireframe стили - только контуры и линии */
+        :root {
+            --line-dark: #000000;
+            --line-gray: #cccccc;
+            --line-light: #eeeeee;
+            --bg-wireframe: #ffffff;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            width: 100%;
+        }
+
+        .navbar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            padding: 20px 0 12px;
+            position: relative;
+        }
+
+        /* логотип-плейсхолдер */
+        .logo-wireframe {
+            width: 140px;
+            height: 50px;
+            border: 2px solid var(--line-dark);
+            border-radius: 12px;
+            background: var(--bg-wireframe);
+        }
+
+        /* кнопка переключения темы */
+        .theme-toggle-wireframe {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            border: 2px solid var(--line-dark);
+            border-radius: 50%;
+            background: var(--bg-wireframe);
+            z-index: 1000;
+        }
+
+        /* карточка профиля */
+        .profile-card-wireframe {
+            border: 2px solid var(--line-light);
+            border-radius: 48px;
+            padding: 32px 24px;
+            margin-top: 20px;
+            background: var(--bg-wireframe);
+        }
+
+        /* аватар */
+        .avatar-wireframe {
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--line-dark);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background: var(--bg-wireframe);
+            position: relative;
+        }
+
+        .avatar-lines {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+        }
+
+        .avatar-lines .line {
+            height: 8px;
+            background: var(--line-gray);
+            margin-bottom: 6px;
+            border-radius: 2px;
+        }
+
+        /* линии для имени и email */
+        .name-line {
+            width: 150px;
+            height: 24px;
+            background: var(--line-dark);
+            margin: 0 auto 8px;
+        }
+
+        .email-line {
+            width: 180px;
+            height: 14px;
+            background: var(--line-gray);
+            margin: 0 auto;
+        }
+
+        /* информационные строки */
+        .info-item-wireframe {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--line-light);
+        }
+
+        .info-icon-wireframe {
+            width: 48px;
+            height: 48px;
+            border: 2px solid var(--line-dark);
+            border-radius: 30px;
+            background: var(--bg-wireframe);
+        }
+
+        .info-content-wireframe {
+            flex: 1;
+        }
+
+        .info-label-wireframe {
+            width: 50px;
+            height: 10px;
+            background: var(--line-gray);
+            margin-bottom: 8px;
+        }
+
+        .info-value-wireframe {
+            width: 160px;
+            height: 18px;
+            background: var(--line-dark);
+        }
+
+        /* выпадающее меню */
+        .dropdown-wireframe {
+            position: relative;
+            width: 100%;
+            margin-top: 32px;
+        }
+
+        .dropdown-btn-wireframe {
+            width: 100%;
+            height: 52px;
+            border: 2px solid var(--line-dark);
+            border-radius: 50px;
+            background: var(--bg-wireframe);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .dropdown-btn-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dropdown-icon-wireframe {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--line-dark);
+            border-radius: 4px;
+        }
+
+        .dropdown-text-wireframe {
+            width: 100px;
+            height: 16px;
+            background: var(--line-dark);
+        }
+
+        .dropdown-arrow-wireframe {
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--line-dark);
+            border-top: none;
+            border-left: none;
+            transform: rotate(45deg);
+        }
+
+        .dropdown-menu-wireframe {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            right: 0;
+            border: 2px solid var(--line-light);
+            border-radius: 28px;
+            background: var(--bg-wireframe);
+            z-index: 100;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+        }
+
+        .dropdown-menu-wireframe.show {
+            max-height: 400px;
+        }
+
+        /* элемент заказа */
+        .order-item-wireframe {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--line-light);
+        }
+
+        .order-image-wireframe {
+            width: 55px;
+            height: 55px;
+            border: 2px solid var(--line-dark);
+            border-radius: 16px;
+            background: var(--bg-wireframe);
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .order-image-lines {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+        }
+
+        .order-image-lines .line {
+            height: 6px;
+            background: var(--line-gray);
+            margin-bottom: 4px;
+        }
+
+        .order-info-wireframe {
+            flex: 1;
+        }
+
+        .order-name-wireframe {
+            width: 120px;
+            height: 14px;
+            background: var(--line-dark);
+            margin-bottom: 6px;
+        }
+
+        .order-price-wireframe {
+            width: 60px;
+            height: 12px;
+            background: var(--line-gray);
+        }
+
+        .order-status-wireframe {
+            width: 90px;
+            height: 28px;
+            border: 1px solid var(--line-gray);
+            border-radius: 50px;
+            background: var(--bg-wireframe);
+        }
+
+        /* кнопка выхода */
+        .logout-btn-wireframe {
+            width: 100%;
+            height: 52px;
+            border: 2px solid var(--line-dark);
+            border-radius: 50px;
+            background: var(--bg-wireframe);
+            margin-top: 12px;
+        }
+
+        /* ссылка назад */
+        .back-link-wireframe {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .back-arrow-wireframe {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--line-dark);
+            border-top: none;
+            border-right: none;
+            transform: rotate(45deg);
+        }
+
+        .back-text-wireframe {
+            width: 140px;
+            height: 16px;
+            background: var(--line-dark);
+        }
+
+        /* не авторизован */
+        .unauthorized-wireframe {
+            text-align: center;
+            padding: 60px 20px;
+            border: 2px solid var(--line-light);
+            border-radius: 48px;
+        }
+
+        .unauthorized-icon-wireframe {
+            width: 64px;
+            height: 64px;
+            border: 2px solid var(--line-dark);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+
+        .unauthorized-title-wireframe {
+            width: 180px;
+            height: 28px;
+            background: var(--line-dark);
+            margin: 0 auto 16px;
+        }
+
+        .unauthorized-text-wireframe {
+            width: 220px;
+            height: 14px;
+            background: var(--line-gray);
+            margin: 0 auto 24px;
+        }
+
+        .unauthorized-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .unauthorized-btn-wireframe {
+            width: 100%;
+            height: 48px;
+            border: 2px solid var(--line-dark);
+            border-radius: 50px;
+            background: var(--bg-wireframe);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 16px;
+            }
+            .profile-card-wireframe {
+                padding: 24px 20px;
+            }
+            .avatar-wireframe {
+                width: 80px;
+                height: 80px;
+            }
+            .name-line {
+                width: 120px;
+                height: 20px;
+            }
+            .email-line {
+                width: 140px;
+                height: 12px;
+            }
+            .info-value-wireframe {
+                width: 130px;
+            }
+            .order-status-wireframe {
+                width: 75px;
+                height: 24px;
+            }
+            .order-name-wireframe {
+                width: 90px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-toggle-wireframe"></div>
+
+    <div class="container">
+        <div class="navbar">
+            <div class="logo-wireframe"></div>
+        </div>
+
+        <!-- авторизованный профиль (по умолчанию показываем) -->
+        <div id="profile-container">
+            <div class="profile-card-wireframe">
+                <div class="avatar-wireframe">
+                    <div class="avatar-lines">
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line" style="width: 80%; margin: 0 auto;"></div>
+                    </div>
+                </div>
+                <div class="name-line"></div>
+                <div class="email-line"></div>
+
+                <div style="margin-top: 32px;">
+                    <div class="info-item-wireframe">
+                        <div class="info-icon-wireframe"></div>
+                        <div class="info-content-wireframe">
+                            <div class="info-label-wireframe"></div>
+                            <div class="info-value-wireframe"></div>
+                        </div>
+                    </div>
+                    <div class="info-item-wireframe">
+                        <div class="info-icon-wireframe"></div>
+                        <div class="info-content-wireframe">
+                            <div class="info-label-wireframe"></div>
+                            <div class="info-value-wireframe"></div>
+                        </div>
+                    </div>
+                    <div class="info-item-wireframe">
+                        <div class="info-icon-wireframe"></div>
+                        <div class="info-content-wireframe">
+                            <div class="info-label-wireframe"></div>
+                            <div class="info-value-wireframe"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dropdown-wireframe">
+                    <div class="dropdown-btn-wireframe">
+                        <div class="dropdown-btn-left">
+                            <div class="dropdown-icon-wireframe"></div>
+                            <div class="dropdown-text-wireframe"></div>
+                        </div>
+                        <div class="dropdown-arrow-wireframe"></div>
+                    </div>
+                    <div class="dropdown-menu-wireframe">
+                        <!-- заказ 1 -->
+                        <div class="order-item-wireframe">
+                            <div class="order-image-wireframe">
+                                <div class="order-image-lines">
+                                    <div class="line"></div>
+                                    <div class="line"></div>
+                                </div>
+                            </div>
+                            <div class="order-info-wireframe">
+                                <div class="order-name-wireframe"></div>
+                                <div class="order-price-wireframe"></div>
+                            </div>
+                            <div class="order-status-wireframe"></div>
+                        </div>
+                        <!-- заказ 2 -->
+                        <div class="order-item-wireframe">
+                            <div class="order-image-wireframe">
+                                <div class="order-image-lines">
+                                    <div class="line"></div>
+                                    <div class="line"></div>
+                                </div>
+                            </div>
+                            <div class="order-info-wireframe">
+                                <div class="order-name-wireframe"></div>
+                                <div class="order-price-wireframe"></div>
+                            </div>
+                            <div class="order-status-wireframe"></div>
+                        </div>
+                        <!-- заказ 3 -->
+                        <div class="order-item-wireframe">
+                            <div class="order-image-wireframe">
+                                <div class="order-image-lines">
+                                    <div class="line"></div>
+                                    <div class="line"></div>
+                                </div>
+                            </div>
+                            <div class="order-info-wireframe">
+                                <div class="order-name-wireframe"></div>
+                                <div class="order-price-wireframe"></div>
+                            </div>
+                            <div class="order-status-wireframe"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="logout-btn-wireframe"></div>
+            </div>
+        </div>
+
+        <div class="back-link-wireframe">
+            <div class="back-arrow-wireframe"></div>
+            <div class="back-text-wireframe"></div>
+        </div>
+    </div>
+
+    <!-- версия для неавторизованного пользователя (закомментирована, для демонстрации) -->
+    <!--
+    <div class="container">
+        <div class="unauthorized-wireframe">
+            <div class="unauthorized-icon-wireframe"></div>
+            <div class="unauthorized-title-wireframe"></div>
+            <div class="unauthorized-text-wireframe"></div>
+            <div class="unauthorized-buttons">
+                <div class="unauthorized-btn-wireframe"></div>
+                <div class="unauthorized-btn-wireframe"></div>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <script>
+        // небольшой скрипт для демонстрации открытия/закрытия выпадающего меню (опционально)
+        const dropdownBtn = document.querySelector('.dropdown-btn-wireframe');
+        const dropdownMenu = document.querySelector('.dropdown-menu-wireframe');
+        
+        if (dropdownBtn && dropdownMenu) {
+            dropdownBtn.addEventListener('click', () => {
+                dropdownMenu.classList.toggle('show');
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                    dropdownMenu.classList.remove('show');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
